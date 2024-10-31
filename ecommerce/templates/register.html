@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h3 class="mt-1 text-center">Create an account</h3>
+
+<div class="container mt-4" style="max-width: 800px; padding-bottom: 60px; ">
+<form method="post">
+    {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" name="u" placeholder="Enter username">
+      </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="p" placeholder="Enter password">
+      </div>
+
+
+
+    <div class="mb-3">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" name="cp" placeholder="Enter confirm password">
+      </div>
+
+
+
+    <div class="mb-3">
+        <label class="form-label">First name</label>
+        <input type="text" class="form-control" name="f" placeholder="Enter firstname">
+      </div>
+
+
+
+    <div class="mb-3">
+        <label class="form-label">Last name</label>
+        <input type="text" class="form-control" name="l" placeholder="Enter lastname">
+      </div>
+
+
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="e" placeholder="Enter email">
+      </div>
+
+          <button type="submit" class="btn btn-dark">SignUp</button>
+    </form>
+  </div>
+{% endblock %}

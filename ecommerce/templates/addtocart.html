@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 mb-5 p-4">
+   <div class="row">
+       <!-- Cart Items Section -->
+       <div class="col-lg-8">
+           <table class="table table-dark table-hover shadow rounded-3">
+               <thead class="text-center bg-gradient" style="background-color: #343a40;">
+                   <tr>
+                       <th colspan="6" class="fs-4 py-3 text-uppercase" style="letter-spacing: 1.5px; color: #f8b400;">Your Items</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   {% for i in cart %}
+                   <tr class="align-middle text-light">
+                       <td><img src="{{i.product.image.url}}" class="img-fluid rounded shadow-sm" style="height: 90px; width: 90px; object-fit: cover;"> </td>
+                       <td><strong>{{i.product.name}}</strong></td>
+                       <td>
+                           <span class="text-muted">Price:</span> ₹{{i.product.price}}<br>
+                           <span class="text-muted">Qty:</span> {{i.quantity}}
+                       </td>
+                       <td class="text-warning fw-bold">Subtotal: ₹{{i.subtotal}}</td>
+                       <td class="text-center">
+                           {% if i.product.stock > 0 %}
+                               <a href="{% url 'cart:addtocart' i.product.id %}" class="btn btn-sm rounded-circle text-white shadow" style="background-color: #28a745;"><i class="fa-solid fa-cart-plus"></i></a>
+                           {% endif %}
+                           <a href="{% url 'cart:cartremove' i.product.id %}" class="btn btn-sm rounded-circle text-white shadow mx-2" style="background-color: #ffc107;"><i class="fa-solid fa-minus"></i></a>
+                           <a href="{% url 'cart:cartdelete' i.product.id %}" class="btn btn-sm rounded-circle text-white shadow" style="background-color: #dc3545;"><i class="fa-solid fa-trash"></i></a>
+                       </td>
+                   </tr>
+                   {% endfor %}
+               </tbody>
+           </table>
+       </div>
+
+       <!-- Checkout Section -->
+       <div class="col-lg-4">
+           <div class="card shadow-lg rounded-4 p-4 text-light" style="background-color: #212529;">
+               <h3 class="card-title text-center mb-4" style="color: #f8b400;">Checkout Summary</h3>
+               <p class="card-text fs-5">
+                   <strong>Total Price:</strong> <span class="text-warning">₹{{total}}</span>
+               </p>
+               <div class="d-grid gap-3 mt-4">
+                   <a href="{% url 'cart:orderform' %}" class="btn btn-block fw-bold rounded-pill shadow" style="background-color: #f8b400; border: none; color: black;">Order Now</a>
+                   <a href="{% url 'shop:categories' %}" class="btn btn-outline-light fw-bold rounded-pill">Continue Shopping</a>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+{% endblock %}
+
+

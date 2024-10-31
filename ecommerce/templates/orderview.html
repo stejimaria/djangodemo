@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+    <h2 class="text-center mb-5">Hello, {{ user.username }}! Here are your Orders</h2>
+
+    {% if orders %}
+        <div class="row g-4">
+            {% for i in orders %}
+                <div class="col-md-6 col-lg-4 ">
+                    <div class="card h-100 border-0 shadow  bg-dark text-light">
+                        <img src="{{ i.product.image.url }}" alt="{{ i.product.name }}" class="card-img-top img-fluid" style="max-height: 200px; object-fit: cover;">
+
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">{{ i.product.name }}</h5>
+                            <p class="card-text mb-1"><strong>Price:</strong> ₹{{ i.product.price }}</p>
+                            <p class="mb-1"><strong>Quantity:</strong> {{ i.no_of_items }}</p>
+                            <p class="text-light mb-1"><small><strong>Ordered On:</strong> {{ i.ordered_date|date:"F j, Y" }}</small></p>
+                            <p class="mb-1"><strong>Address:</strong> {{ i.address }}, PIN: {{ i.pin }}</p>
+                            <p class="mb-1"><strong>Phone:</strong> {{ i.phoneno }}</p>
+                            <p><strong>Delivery Status:</strong>
+                                <span class="badge {% if i.delivery_status == 'Delivered' %} bg-success {% else %} bg-danger {% endif %}">
+                                    {{ i.delivery_status }}
+                                </span>
+                            </p>
+                          </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted fs-5">You have no paid orders.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

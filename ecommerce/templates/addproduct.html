@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mb-5 mt-3">
+    <form method="post" action="" enctype="multipart/form-data" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        <h3 class="mb-4 text-warning fw-bold text-center">Add New Product</h3>
+
+        <!-- Product Name Field -->
+        <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            <input type="text" class="form-control" name="n" maxlength="50" required placeholder="Enter product name">
+        </div>
+
+        <!-- Description Field -->
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="d" rows="4" required placeholder="Enter product description"></textarea>
+        </div>
+
+        <!-- Price Field -->
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" name="p" required placeholder="Enter product price">
+        </div>
+
+        <!-- Stock Field -->
+        <div class="mb-3">
+            <label class="form-label">Stock Quantity</label>
+            <input type="number" class="form-control" name="s" required placeholder="Enter stock quantity">
+        </div>
+
+
+        <!-- Image Upload Field -->
+        <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            <input type="file" class="form-control" name="i" accept="image/*" required>
+        </div>
+
+        <!-- Category Field -->
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" name="c" required>
+                <option value="" disabled selected>Select a category</option>
+                <!-- Options for categories should be populated dynamically -->
+                {% for i in links %}
+                <option value="{{ i.name }}">{{ i.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-dark w-100">Add Product</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <img src="{% static 'images/banner.jpg' %}" class="img-fluid" style="height: 400px; width: 100%; object-fit: cover;">
+    </div>
+</div>
+
+<div class="row mt-5 px-4 text-center">
+    <div class="col-12">
+        <h3 class="fw-bold text-dark mb-4" style="font-size: 2rem;">Our Collections</h3>
+        <p class="text-muted" style="font-size: 1.1rem; text-align: justify; line-height: 1.6;">
+            discover a wide variety of products across multiple categories, ensuring you find exactly what you need for every aspect of your life. Our curated collections feature quality items at affordable prices, catering to every taste and lifestyle. With an intuitive interface, shopping becomes effortless, allowing you to browse and explore with ease. Enjoy personalized recommendations tailored to your preferences, ensuring you never miss out on the latest trends or essential items. Plus, our fast delivery service brings your purchases right to your door, making your shopping experience convenient and enjoyable. Experience the joy of finding everything you love in one place!
+        </p>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row g-4">
+        {% for i in cat %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card mx-auto border-0 shadow-sm" style="width: 100%; border-radius: 15px; overflow: hidden;">
+                <img src="{{ i.image.url }}" height="200px" class="card-img-top" alt="..." style="object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3 fw-semibold">{{ i.name }}</h5>
+                    <a href="{% url 'shop:products' i.id %}" class="btn btn-warning mb-2">Products</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
